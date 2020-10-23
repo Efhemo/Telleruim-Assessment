@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_bar"
     android:layout_width="match_parent"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
     android:layout_height="wrap_content"
     android:background="?android:attr/colorBackground"
     app:liftOnScroll="true">
@@ -27,8 +28,8 @@
             android:drawableTint="?attr/colorControlNormal"
             android:textColor="?android:attr/textColorPrimary"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginLeft="@dimen/dimen_16"
-            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"/>
 
         <de.hdodenhof.circleimageview.CircleImageView

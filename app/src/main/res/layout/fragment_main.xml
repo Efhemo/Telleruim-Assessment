@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".MainFragment">
+    tools:context=".ui.main.MainFragment">
 
-    <include layout="@layout/main_app_bar"/>
-
-    <androidx.viewpager.widget.ViewPager
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/pager"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/main_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorBackground"
+        app:liftOnScroll="true">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:minHeight="@dimen/dimen_66"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_weight="1"
+                android:id="@+id/btn_back_arrow"
+                android:background="@android:color/transparent"
+                android:text="Welcome Tester"
+                android:textStyle="bold"
+                android:padding="@dimen/dimen_4"
+                android:gravity="start|center_vertical"
+                android:minHeight="@dimen/dimen_0"
+                android:drawableTint="?attr/colorControlNormal"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_marginStart="@dimen/dimen_16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_marginEnd="@dimen/dimen_16"
+                android:id="@+id/profile_display"
+                android:layout_width="@dimen/dimen_40"
+                android:src="@drawable/img_person"
+                android:layout_height="@dimen/dimen_40"/>
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="@dimen/dimen_50" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-    </androidx.viewpager.widget.ViewPager>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_enumerate"
+        android:backgroundTint="@color/white"
+        android:layout_gravity="bottom|end"
+        app:borderWidth="@dimen/dimen_0"
+        app:maxImageSize="@dimen/dimen_40"
+        app:tint="@color/colorPrimary"
+        android:layout_margin="@dimen/dimen_36"
+        android:src="@drawable/ic_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
