@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment">
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="Farm App"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/main_layout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="0.25" />
+
+    <androidx.core.widget.NestedScrollView
+        android:fillViewport="true"
+        android:id="@+id/main_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/login_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_app_name"
+        app:layout_constraintVertical_weight="0.75">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_layout_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edl_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_36"
+                android:layout_marginTop="@dimen/dimen_150"
+                android:layout_marginEnd="@dimen/dimen_36"
+                android:hint="Email"
+                android:textColorHint="@color/white"
+                app:boxBackgroundMode="outline"
+                app:boxStrokeColor="@color/white"
+                app:hintTextColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edl_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_36"
+                android:hint="Password"
+                android:textColorHint="@color/white"
+                app:boxStrokeColor="@color/white"
+                app:hintTextColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="@id/edl_email"
+                app:layout_constraintRight_toRightOf="@id/edl_email"
+                app:layout_constraintTop_toBottomOf="@id/edl_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/white" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sign_in"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_30"
+                android:backgroundTint="?android:attr/colorBackground"
+                android:padding="@dimen/dimen_20"
+                android:text="Sign In"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintLeft_toLeftOf="@id/edl_password"
+                app:layout_constraintRight_toRightOf="@id/edl_password"
+                app:layout_constraintTop_toBottomOf="@id/edl_password" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_password"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="@dimen/dimen_0"
+                android:text="Forgot password?"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="@id/btn_sign_in"
+                app:layout_constraintRight_toRightOf="@id/btn_sign_in"
+                app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sign_up"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                android:layout_marginBottom="@dimen/dimen_20"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="@dimen/dimen_0"
+                android:text="Sign up"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/btn_sign_in" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_farmers_sign_up"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="@dimen/dimen_0"
+                android:text="Farmer Sign up"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/btn_sign_up"
+                app:layout_constraintRight_toRightOf="@id/btn_sign_in"
+                app:layout_constraintTop_toTopOf="@id/btn_sign_up" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
