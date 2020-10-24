@@ -21,7 +21,16 @@
         android:id="@+id/mainFragment"
         android:name="com.efhem.farmapp.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_mainFarmerFragment"
+            app:destination="@id/mainFarmerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFarmerFragment"
+        android:name="com.efhem.farmapp.ui.farmer.MainFarmerFragment"
+        android:label="MainFarmerFragment" />
 
 
 </navigation>

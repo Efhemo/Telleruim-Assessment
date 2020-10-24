@@ -43,13 +43,12 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
         }
 
         fun bind(item: Farmer) = with(itemView) {
-            Glide.with(rootView.context).load(item.avatar).apply(RequestOptions.fitCenterTransform()).into(this.avatar)
-
-            Glide.with(this.context).load(item)
+            Glide.with(this.context).load(item.avatar)
                 .apply(RequestOptions.placeholderOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.errorOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.centerCropTransform())
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(this.avatar)
+
             this.tv_name.text = "${item.surname} ${item.firstName}"
             this.tv_city.text = item.city
         }

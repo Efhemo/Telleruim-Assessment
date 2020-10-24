@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.appbar.AppBarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/appbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/colorBackground"
+    app:liftOnScroll="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:minHeight="@dimen/dimen_66"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/btn_back_arrow"
+            android:background="?selectableItemBackgroundBorderless"
+            android:drawableStart="@drawable/ic_arrow_back_ios"
+            android:text="@string/back"
+            android:padding="@dimen/dimen_4"
+            android:minHeight="@dimen/dimen_0"
+            android:layout_centerVertical="true"
+            android:drawableTint="?attr/colorControlNormal"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginStart="@dimen/dimen_16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="?android:attr/textColorPrimary"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            tools:text="Title"
+            android:layout_width="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</com.google.android.material.appbar.AppBarLayout>

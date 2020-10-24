@@ -18,21 +18,21 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
     // This property is only valid between onCreateView and onDestroyView.
     private val bind get() = _bind!!
-    private var navController: NavController? = null
 
-    private val fragments =
-        listOf(DashboardFragment.newInstance(), FarmerListFragment.newInstance())
+    private val fragments = listOf(DashboardFragment.newInstance(), FarmerListFragment.newInstance())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _bind = FragmentMainBinding.bind(view)
 
-        navController = NavHostFragment.findNavController(this)
         bind.pager.adapter = MainFragmentPagerAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, fragments)
 
         TabLayoutMediator(bind.tabLayout, bind.pager) { tab, position -> tab.text = when (position) {
             0 -> "DashBoard" else -> "Farmers" }
         }.attach()
+        bind.fabForm.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.action_mainFragment_to_mainFarmerFragment)
+        }
 
     }
 
