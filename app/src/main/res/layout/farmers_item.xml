@@ -16,6 +16,7 @@
         android:layout_height="@dimen/dimen_100"/>
 
     <TextView
+        android:layout_marginTop="@dimen/dimen_12"
         android:id="@+id/tv_name"
         android:textColor="?android:attr/textColorPrimary"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -28,7 +29,6 @@
         tools:text="Ado Ekiti"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
 
 
 </LinearLayout>

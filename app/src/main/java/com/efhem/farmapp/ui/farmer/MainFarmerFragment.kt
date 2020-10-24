@@ -21,7 +21,7 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
     private var navController: NavController? = null
 
     private val fragments =
-        listOf(FarmerDetailsFragment.newInstance(), FarmLocationFragment.newInstance())
+        listOf( FarmLocationFragment.newInstance(), FarmerDetailsFragment.newInstance())
 
     private val listener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
