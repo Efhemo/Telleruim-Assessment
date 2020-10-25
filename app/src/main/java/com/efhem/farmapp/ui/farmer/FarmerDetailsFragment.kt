@@ -3,10 +3,14 @@ package com.efhem.farmapp.ui.farmer
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.net.toFile
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -31,14 +35,23 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
 
     private val viewModel by sharedViewModel<FarmViewModel>()
 
+    private val imageContent = registerForActivityResult(ActivityResultContracts.GetContent()){ uri ->
+        uri?.let {
+            Glide.with(requireContext()).load(uri)
+                .apply(RequestOptions.centerCropTransform())
+                .diskCacheStrategy(DiskCacheStrategy.RESOURCE).into(bind.avatar)
+            viewModel.setAvatar(uri.toString())
+        }
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _bind = FragmentFarmerDetailsBinding.bind(view)
 
         initVIew()
-        viewModel.observableFarmer.observe(viewLifecycleOwner, { farmer -> setFarmer(farmer) })
-        viewModel.error.observe(viewLifecycleOwner, { showViewError(it) })
+        viewModel.observableFarmer.observe(viewLifecycleOwner, { farmer -> farmer?.let { setFarmer(farmer) } })
+        viewModel.error.observe(viewLifecycleOwner, { it?.let { showViewError(it) } })
 
     }
 
@@ -50,11 +63,12 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
         bind.edlEmail.editText?.doOnTextChanged { text, _, _, _ ->  viewModel.fields["email"] = text.toString() }
         bind.edlDob.editText?.doOnTextChanged { text, _, _, _ ->  viewModel.fields["dob"] = text.toString() }
         bind.edlFarmName.editText?.doOnTextChanged { text, _, _, _ -> viewModel.fields["farmname"] = text.toString() }
-        bind.rgGender.setOnCheckedChangeListener { group, checkedId ->
+        bind.rgGender.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId == R.id.male){
-                viewModel.gender = "Male"
-            }else viewModel.gender = "Female"
+                viewModel.setGender("Male")
+            }else viewModel.setGender("Female")
         }
+        bind.camera.setOnClickListener { imageContent.launch("image/*") }
     }
 
 
@@ -86,6 +100,7 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
             Field.DOB -> bind.edlDob.error = if (it.isError) it.error else null
             Field.EMAIL -> bind.edlEmail.error = if (it.isError) it.error else null
             Field.FARM_NAME -> bind.edlFarmName.error = if (it.isError) it.error else null
+            Field.AVATAR -> Toast.makeText(requireContext(), "Select image", Toast.LENGTH_LONG).show()
             else -> Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
         }
     }
@@ -94,6 +109,11 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
     override fun onDestroyView() {
         super.onDestroyView()
         _bind = null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.clear()
     }
 
     companion object {

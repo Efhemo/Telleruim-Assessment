@@ -138,7 +138,6 @@
                 android:id="@+id/rg_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checkedButton="@id/male"
                 android:orientation="horizontal">
 
                 <RadioButton

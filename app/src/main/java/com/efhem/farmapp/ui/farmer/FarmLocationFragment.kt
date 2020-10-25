@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentFarmLocationBinding
 import com.efhem.farmapp.ui.FarmCoordinateActivity
+import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.MapUtil
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapReadyCallback {

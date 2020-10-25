@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -84,6 +85,7 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
                 R.id.btn_back_arrow -> navController?.popBackStack()
                 R.id.btn_next -> {
                     if(viewModel.isFormValidated()){
+                        println("filled farmer form ${viewModel.getFilledFarmerForm()}")
                         pager.currentItem = 1
                     }else null
                 }
@@ -98,6 +100,7 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
             }
         }
     }
+
 }
 
 class MainFragmentPagerAdapter(
