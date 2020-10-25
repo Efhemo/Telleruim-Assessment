@@ -16,7 +16,7 @@ import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
 import kotlinx.android.synthetic.main.farmers_item.view.*
 
-class FarmersAdapter(private val interaction: Interaction? = null) :
+class FarmersAdapter(private val interaction: Interaction) :
     ListAdapter<Farmer, FarmersAdapter.FarmerViewHolder>(FarmerDC()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FarmerViewHolder(
@@ -56,10 +56,6 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
         }
     }
 
-    interface Interaction {
-        fun onFarmersClick(farmer: Farmer)
-    }
-
     private class FarmerDC : DiffUtil.ItemCallback<Farmer>() {
         override fun areItemsTheSame(
             oldItem: Farmer,
@@ -72,4 +68,8 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
             newItem: Farmer
         ): Boolean = oldItem.id == newItem.id
     }
+}
+
+class Interaction(val clickListener: (farmer: Farmer) -> Unit) {
+    fun onFarmersClick(farmer: Farmer) = clickListener(farmer)
 }

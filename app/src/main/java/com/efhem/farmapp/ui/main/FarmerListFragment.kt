@@ -13,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.efhem.farmapp.R
 import com.efhem.farmapp.domain.Farmer
 import com.efhem.farmapp.ui.adapters.FarmersAdapter
+import com.efhem.farmapp.ui.adapters.Interaction
+import com.efhem.farmapp.util.K
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FarmerListFragment : Fragment(R.layout.fragment_farmer_list) {
 
     private val mainViewModel by sharedViewModel<MainViewModel>()
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,13 +67,12 @@ class FarmerListFragment : Fragment(R.layout.fragment_farmer_list) {
         }
         rc.addItemDecoration(verticalDecorator)
         rc.addItemDecoration(horizontalDecorator)
-        val adapter = FarmersAdapter(object : FarmersAdapter.Interaction {
-            override fun onFarmersClick(farmer: Farmer) {
-                NavHostFragment.findNavController(this@FarmerListFragment)
-                    .navigate(R.id.action_mainFragment_to_mainFarmerFragment)
-            }
+        return FarmersAdapter(Interaction {
+            NavHostFragment.findNavController(this@FarmerListFragment)
+                .navigate(R.id.action_mainFragment_to_mainFarmerFragment, Bundle().apply {
+                    putParcelable(K.BUNDLE_ENTRY_FARMER, it)
+                })
         })
-        return adapter
     }
 
     companion object {

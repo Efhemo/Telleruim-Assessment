@@ -11,6 +11,7 @@ import com.efhem.farmapp.data.remote.mappers.FarmersRemoteModelMapper
 import com.efhem.farmapp.domain.repositories.FarmerRepository
 import com.efhem.farmapp.domain.repositories.IFarmerLocalRepo
 import com.efhem.farmapp.domain.repositories.IFarmerRemoteRepo
+import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.ui.main.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.ext.koin.viewModel
@@ -37,6 +38,7 @@ val mRepositoryModules = module {
 val mViewModelsModules = module {
 
     viewModel { MainViewModel(get()) }
+    viewModel { FarmViewModel() }
 
 }
 

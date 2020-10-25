@@ -1,6 +1,10 @@
 package com.efhem.farmapp.domain
 
-class Farmer(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class Farmer(
     val id: String,
     val surname: String,
     val firstName: String,
@@ -9,4 +13,4 @@ class Farmer(
     val gender: String,
     val dob: String,
     val avatar: String
-)
+) : Parcelable

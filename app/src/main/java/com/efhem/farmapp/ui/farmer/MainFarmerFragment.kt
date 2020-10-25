@@ -11,6 +11,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentMainFarmerBinding
+import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.ui.FarmViewModel
+import com.efhem.farmapp.util.K
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClickListener {
 
@@ -19,6 +23,16 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
     // This property is only valid between onCreateView and onDestroyView.
     private val bind get() = _bind!!
     private var navController: NavController? = null
+
+    private val viewModel by sharedViewModel<FarmViewModel>()
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let { bundle ->
+            bundle.getParcelable<Farmer>(K.BUNDLE_ENTRY_FARMER)?.let { viewModel.setFarmer(it) }
+        }
+    }
 
     private val fragments =
         listOf( FarmerDetailsFragment.newInstance(), FarmLocationFragment.newInstance() )
@@ -69,7 +83,9 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
             when (view.id) {
                 R.id.btn_back_arrow -> navController?.popBackStack()
                 R.id.btn_next -> {
-                    pager.currentItem = 1
+                    if(viewModel.isFormValidated()){
+                        pager.currentItem = 1
+                    }else null
                 }
                 R.id.btn_previous_page -> {
                     if (pager.currentItem != 0) {
