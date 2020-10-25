@@ -31,6 +31,8 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
     // This property is only valid between onCreateView and onDestroyView.
     private val bind get() = _bind!!
     private var mMap: GoogleMap? = null
+    private val viewModel by sharedViewModel<FarmViewModel>()
+
 
 
     private val captureLauncher =
@@ -44,9 +46,9 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _bind = FragmentFarmLocationBinding.bind(view)
-//        bind.takeLocation.setOnClickListener {
-//            captureLauncher.launch(Intent(requireContext(), FarmCoordinateActivity::class.java))
-//        }
+        bind.fabForm.setOnClickListener {
+            captureLauncher.launch(Intent(requireContext(), FarmCoordinateActivity::class.java))
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)

@@ -80,7 +80,7 @@ class FarmViewModel : ViewModel() {
 
     fun getFilledFarmerForm(): Farmer {
         return if(farmerId == null){
-            Farmer( id = "",
+            Farmer(
                 surname = fields["surname"]!!, firstName = fields["firstname"]!!,
                 city = fields["city"]!!, email =  fields["email"]!!, gender = fields["gender"]!!,
                 dob = fields["dob"]!!, avatar = fields["avatar"]!!

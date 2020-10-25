@@ -63,6 +63,8 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
         bind.pager.apply {
             adapter = MainFragmentPagerAdapter(childFragmentManager, lifecycle, fragments)
             isUserInputEnabled = false
+            isSaveEnabled  = false
+            offscreenPageLimit = 2
             registerOnPageChangeCallback(listener)
         }
 
