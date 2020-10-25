@@ -2,41 +2,75 @@ package com.efhem.farmapp.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ProgressBar
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.efhem.farmapp.R
 import com.efhem.farmapp.domain.Farmer
 import com.efhem.farmapp.ui.adapters.FarmersAdapter
+import com.google.android.material.snackbar.Snackbar
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FarmerListFragment : Fragment(R.layout.fragment_farmer_list) {
 
+    private val mainViewModel by sharedViewModel<MainViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val rc = view.findViewById<RecyclerView>(R.id.rc_farmers)
+        val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
+        val rootView = view.findViewById<FrameLayout>(R.id.container)
 
-        val verticalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
-        val horizontalDecorator = DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
+        val adapter = setupRecyclerview(rc)
 
-        val drawable = ResourcesCompat.getDrawable(resources, R.drawable.divider, resources.newTheme())
+        mainViewModel.error.observe(viewLifecycleOwner, Observer {
+            var snackBarDuration = Snackbar.LENGTH_LONG
+            if(mainViewModel.observableFarmers.value.isNullOrEmpty()){
+                snackBarDuration = Snackbar.LENGTH_INDEFINITE
+            }
+            Snackbar.make(rootView, it, snackBarDuration).setAction("Retry", View.OnClickListener {
+                mainViewModel.fetchFarmers()
+            }).show()
+        })
+        mainViewModel.loading.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
+        mainViewModel.observableFarmers.observe(viewLifecycleOwner, Observer {
+            adapter.swapData(it)
+        })
+
+        rc.adapter = adapter
+    }
+
+    private fun setupRecyclerview(rc: RecyclerView): FarmersAdapter {
+        val verticalDecorator =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL)
+        val horizontalDecorator =
+            DividerItemDecoration(requireContext(), DividerItemDecoration.HORIZONTAL)
+        val drawable =
+            ResourcesCompat.getDrawable(resources, R.drawable.divider, resources.newTheme())
         if (drawable != null) {
             verticalDecorator.setDrawable(drawable)
             horizontalDecorator.setDrawable(drawable)
         }
         rc.addItemDecoration(verticalDecorator)
         rc.addItemDecoration(horizontalDecorator)
-
         val adapter = FarmersAdapter(object : FarmersAdapter.Interaction {
             override fun onFarmersClick(farmer: Farmer) {
-                NavHostFragment.findNavController(this@FarmerListFragment).navigate(R.id.action_mainFragment_to_mainFarmerFragment)
+                NavHostFragment.findNavController(this@FarmerListFragment)
+                    .navigate(R.id.action_mainFragment_to_mainFarmerFragment)
             }
         })
-
-        rc.adapter = adapter
-        adapter.swapData(MainViewModel.listFarmers)
+        return adapter
     }
 
     companion object {

@@ -11,6 +11,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/avatar"
+        android:src="@drawable/glide_placeholder"
         tools:src="@drawable/img_person"
         android:layout_width="@dimen/dimen_100"
         android:layout_height="@dimen/dimen_100"/>
@@ -19,7 +20,8 @@
         android:layout_marginTop="@dimen/dimen_12"
         android:id="@+id/tv_name"
         android:textColor="?android:attr/textColorPrimary"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
         tools:text="John Doe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
