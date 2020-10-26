@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinate_navigation"
+    app:startDestination="@id/fragmentCoordinate">
+
+    <fragment
+        android:id="@+id/fragmentCoordinate"
+        android:name="com.efhem.farmapp.ui.FragmentCoordinate"
+        android:label="fragment_coordinate"
+        tools:layout="@layout/fragment_coordinate" />
+</navigation>

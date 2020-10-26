@@ -19,6 +19,8 @@ class FarmViewModel : ViewModel() {
     val error: LiveData<FieldError?> = _error
 
     var farmerId: String? = null
+    var location: String? = null
+
 
     fun setFarmer(farmer: Farmer) {
         _observableFarmer.value = farmer
@@ -32,6 +34,7 @@ class FarmViewModel : ViewModel() {
     fun setGender(gender: String){
         fields["gender"] = gender
     }
+
 
     var fields: HashMap<String, String?> = hashMap()
 
@@ -95,6 +98,7 @@ class FarmViewModel : ViewModel() {
     fun clear() {
         farmerId = null
         _observableFarmer.value = null
+        location = null
         _error.value = null
         fields = hashMap()
     }

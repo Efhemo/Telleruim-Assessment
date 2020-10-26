@@ -57,12 +57,12 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
 
     private fun initVIew() {
 
-        bind.edlSurname.editText?.doOnTextChanged { text, _, _, _ -> viewModel.fields["surname"] = text.toString() }
-        bind.edlFirstName.editText?.doOnTextChanged { text, _, _, _ ->  viewModel.fields["firstname"] = text.toString() }
-        bind.edlCity.editText?.doOnTextChanged { text, _, _, _ -> viewModel.fields["city"] = text.toString() }
-        bind.edlEmail.editText?.doOnTextChanged { text, _, _, _ ->  viewModel.fields["email"] = text.toString() }
-        bind.edlDob.editText?.doOnTextChanged { text, _, _, _ ->  viewModel.fields["dob"] = text.toString() }
-        bind.edlFarmName.editText?.doOnTextChanged { text, _, _, _ -> viewModel.fields["farmname"] = text.toString() }
+        bind.edlSurname.editText?.doAfterTextChanged { editable ->  viewModel.fields["surname"] = editable.toString() }
+        bind.edlFirstName.editText?.doAfterTextChanged { editable ->   viewModel.fields["firstname"] = editable.toString() }
+        bind.edlCity.editText?.doAfterTextChanged { editable ->  viewModel.fields["city"] = editable.toString() }
+        bind.edlEmail.editText?.doAfterTextChanged { editable ->  viewModel.fields["email"] = editable.toString() }
+        bind.edlDob.editText?.doAfterTextChanged { editable ->   viewModel.fields["dob"] = editable.toString() }
+        bind.edlFarmName.editText?.doAfterTextChanged { editable ->  viewModel.fields["farmname"] = editable.toString() }
         bind.rgGender.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId == R.id.male){
                 viewModel.setGender("Male")

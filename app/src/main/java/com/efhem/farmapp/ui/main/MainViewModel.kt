@@ -14,9 +14,7 @@ class MainViewModel(private val farmerRepository: FarmerRepository) : ViewModel(
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
-
-    private val _observableFarmers = MutableLiveData<List<Farmer>>()
-    val observableFarmers: MutableLiveData<List<Farmer>> = _observableFarmers
+    val observableFarmers: LiveData<List<Farmer>> = farmerRepository.observableFarmers()
 
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean> = _loading
@@ -27,7 +25,6 @@ class MainViewModel(private val farmerRepository: FarmerRepository) : ViewModel(
         _loading.value = true
         viewModelScope.launch {
             when (val result = farmerRepository.fetchFarmers()) {
-                is ResultWrapper.Success -> result.data.let { _observableFarmers.value = it }
                 is ResultWrapper.Error -> _error.value = result.errorData.message
                 is ResultWrapper.NetworkError -> _error.value = result.message
             }
