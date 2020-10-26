@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import com.efhem.farmapp.data.local.FarmAppDatabase
 import com.efhem.farmapp.data.local.dao.FarmerDao
 import com.efhem.farmapp.data.local.mappers.FarmerLocalModelMapper
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.repositories.IFarmerLocalRepo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +18,10 @@ class FarmerLocalRepo(database: FarmAppDatabase, private val farmerLocalModelMap
     private val farmerDao: FarmerDao = database.daoFarmer()
     override suspend fun getFarmers(): List<Farmer> = withContext(ioDispatcher) {
         farmerLocalModelMapper.mapToDomainList(farmerDao.getFarmers()) }
+
+    override suspend fun getFarmer(farmerId: String): Farmer {
+        return farmerLocalModelMapper.mapToDomain(farmerDao.getFarmer(farmerId))
+    }
 
     override suspend fun saveFarmers(farmers: List<Farmer>) {
         farmerDao.insertFarmers(farmerLocalModelMapper.mapToDtoList(farmers))

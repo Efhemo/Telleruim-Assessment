@@ -1,7 +1,9 @@
 package com.efhem.farmapp.data.local.mappers
 
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.mappers.BaseMapper
+import com.efhem.farmapp.util.K
+import com.efhem.farmapp.util.Utils
 
 class FarmerLocalModelMapper : BaseMapper<FarmerLocal, Farmer> {
 
@@ -27,7 +29,7 @@ class FarmerLocalModelMapper : BaseMapper<FarmerLocal, Farmer> {
             type.email,
             type.gender,
             type.dob,
-            type.avatar
+            K.BASE_IMAGE_URL + Utils.removeBackSlash(type.avatar)
         )
     }
 

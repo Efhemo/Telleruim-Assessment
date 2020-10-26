@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/appbar"
+    app:layout_constraintVertical_weight="0.65"
+    tools:context=".ui.FragmentCoordinate">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edl_farm_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_24"
+        android:layout_marginLeft="@dimen/dimen_30"
+        android:layout_marginRight="@dimen/dimen_30"
+        android:hint="@string/farm_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ed_farm_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <FrameLayout
+        android:id="@+id/location_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="@dimen/dimen_24"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edl_farm_name">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/connect_1_2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/diagonal_line"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/location_2"
+        app:layout_constraintLeft_toRightOf="@id/location_2"
+        app:layout_constraintRight_toLeftOf="@id/location_1"
+        app:layout_constraintTop_toBottomOf="@id/location_1" />
+
+    <FrameLayout
+        android:id="@+id/location_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginStart="@dimen/dimen_24"
+        app:layout_constraintBottom_toTopOf="@id/location_4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_1">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/connect_1_3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/diagonal_line"
+        android:backgroundTint="@color/colorPrimary"
+        android:rotationY="-178"
+        app:layout_constraintBottom_toTopOf="@id/location_3"
+        app:layout_constraintLeft_toRightOf="@id/location_1"
+        app:layout_constraintRight_toLeftOf="@id/location_3"
+        app:layout_constraintTop_toBottomOf="@id/location_1" />
+
+    <FrameLayout
+        android:id="@+id/location_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/dimen_24"
+        app:layout_constraintBottom_toTopOf="@id/location_4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/location_1">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/connect_3_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/diagonal_line"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/location_4"
+        app:layout_constraintLeft_toRightOf="@id/location_4"
+        app:layout_constraintRight_toLeftOf="@id/location_3"
+        app:layout_constraintTop_toBottomOf="@id/location_3" />
+
+    <FrameLayout
+        android:id="@+id/location_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/location_1"
+        app:layout_constraintRight_toRightOf="@id/location_1"
+        app:layout_constraintTop_toBottomOf="@id/location_3">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:elevation="16dp"
+            android:text="4"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/white" />
+    </FrameLayout>
+
+    <View
+        android:visibility="gone"
+        android:id="@+id/connect_2_4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/diagonal_line"
+        android:backgroundTint="@color/colorPrimary"
+        android:rotationY="-178"
+        app:layout_constraintBottom_toTopOf="@id/location_4"
+        app:layout_constraintLeft_toRightOf="@id/location_2"
+        app:layout_constraintRight_toLeftOf="@id/location_4"
+        app:layout_constraintTop_toBottomOf="@id/location_2" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

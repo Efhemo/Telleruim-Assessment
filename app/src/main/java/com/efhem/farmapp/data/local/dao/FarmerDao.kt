@@ -10,13 +10,16 @@ interface FarmerDao {
     @Query("SELECT * FROM farmerlocal")
     suspend fun getFarmers(): List<FarmerLocal>
 
+    @Query("SELECT * FROM farmerlocal WHERE id = :farmerId ")
+    suspend fun getFarmer(farmerId: String): FarmerLocal
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFarmers(form: List<FarmerLocal>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFarmer(form: FarmerLocal)
 
-    @Query("SELECT * FROM farmerlocal")
+    @Query("SELECT * FROM farmerlocal ORDER BY id DESC")
     fun observeFarmers(): LiveData<List<FarmerLocal>>
 
     @Query("DELETE FROM farmerlocal")

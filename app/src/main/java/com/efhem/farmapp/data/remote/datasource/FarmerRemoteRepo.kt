@@ -4,7 +4,7 @@ import com.efhem.farmapp.data.remote.RemoteApi
 import com.efhem.farmapp.data.remote.mappers.FarmersRemoteModelMapper
 import com.efhem.farmapp.data.remote.safeApiResult
 import com.efhem.farmapp.domain.ErrorData
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.ResultWrapper
 import com.efhem.farmapp.domain.repositories.IFarmerRemoteRepo
 import kotlinx.coroutines.CoroutineDispatcher

@@ -1,154 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.farmer.FarmerDetailsFragment">
+    android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_surname"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dimen_12"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_24"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:layout_marginRight="@dimen/dimen_24"
-        android:hint="@string/surname"
-        app:layout_constraintTop_toTopOf="parent">
+        tools:context=".ui.farmer.FarmerDetailsFragment">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_surname"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_first_name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_24"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:layout_marginRight="@dimen/dimen_24"
-        android:hint="@string/first_name"
-        app:layout_constraintTop_toBottomOf="@id/edl_surname">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_first_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/dimen_100"
+            android:layout_height="@dimen/dimen_100"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:src="@drawable/glide_placeholder"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:src="@drawable/img_person" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_city"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_24"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:layout_marginRight="@dimen/dimen_24"
-        android:hint="@string/city"
-        app:layout_constraintTop_toBottomOf="@id/edl_first_name">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/camera_background"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:layout_marginStart="@dimen/dimen_50"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/avatar"
+            app:layout_constraintRight_toRightOf="@id/avatar" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_city"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/camera"
+            android:layout_width="@dimen/dimen_30"
+            android:layout_height="@dimen/dimen_30"
+            android:layout_marginStart="@dimen/dimen_50"
+            android:tint="@color/colorPrimary"
+            android:src="@drawable/ic_photo_camera"
+            app:layout_constraintBottom_toBottomOf="@id/avatar"
+            app:layout_constraintRight_toRightOf="@id/avatar" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_email"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dimen_24"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:layout_marginRight="@dimen/dimen_24"
-        android:hint="@string/email"
-        app:layout_constraintTop_toBottomOf="@id/edl_city">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_email"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/gender_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:orientation="vertical"
-        app:layout_constraintLeft_toLeftOf="@id/edl_email"
-        app:layout_constraintRight_toRightOf="@id/edl_email"
-        app:layout_constraintTop_toBottomOf="@id/edl_email">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/gender"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="?android:attr/textColorPrimary" />
-
-        <RadioGroup
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edl_surname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="@dimen/dimen_24"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginRight="@dimen/dimen_24"
+            android:hint="@string/surname"
+            app:layout_constraintTop_toBottomOf="@id/avatar">
 
-            <RadioButton
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_surname"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edl_first_name"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_24"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginRight="@dimen/dimen_24"
+            android:hint="@string/first_name"
+            app:layout_constraintTop_toBottomOf="@id/edl_surname">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_first_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edl_city"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_24"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginRight="@dimen/dimen_24"
+            android:hint="@string/city"
+            app:layout_constraintTop_toBottomOf="@id/edl_first_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edl_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_24"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:layout_marginRight="@dimen/dimen_24"
+            android:hint="@string/email"
+            app:layout_constraintTop_toBottomOf="@id/edl_city">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_email"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/gender_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="@id/edl_email"
+            app:layout_constraintRight_toRightOf="@id/edl_email"
+            app:layout_constraintTop_toBottomOf="@id/edl_email">
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/male" />
+                android:text="@string/gender"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/rg_gender"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/female" />
-        </RadioGroup>
-    </LinearLayout>
+                android:orientation="horizontal">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_dob"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:hint="@string/date_of_birth"
-        app:layout_constraintLeft_toLeftOf="@id/edl_email"
-        app:layout_constraintRight_toRightOf="@id/edl_email"
-        app:layout_constraintTop_toBottomOf="@id/gender_container">
+                <RadioButton
+                    android:id="@+id/male"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/male" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_dob"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/female" />
+            </RadioGroup>
+        </LinearLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edl_farm_name"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_24"
-        android:hint="@string/date_of_birth"
-        app:layout_constraintLeft_toLeftOf="@id/edl_dob"
-        app:layout_constraintRight_toRightOf="@id/edl_dob"
-        app:layout_constraintTop_toBottomOf="@id/edl_dob">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edl_dob"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_24"
+            android:hint="@string/date_of_birth"
+            app:layout_constraintLeft_toLeftOf="@id/edl_email"
+            app:layout_constraintRight_toRightOf="@id/edl_email"
+            app:layout_constraintTop_toBottomOf="@id/gender_container">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ed_farm_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="textEmailAddress" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_dob"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

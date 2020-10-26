@@ -1,5 +1,6 @@
 package com.efhem.farmapp.ui.farmer
 
+import android.location.Location
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -11,6 +12,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentMainFarmerBinding
+import com.efhem.farmapp.domain.model.Farmer
+import com.efhem.farmapp.ui.FarmViewModel
+import com.efhem.farmapp.util.DeviceRequestUtil
+import com.efhem.farmapp.util.K
+import com.efhem.farmapp.util.LocationUtil
+import com.google.android.gms.location.LocationCallback
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClickListener {
 
@@ -19,6 +27,20 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
     // This property is only valid between onCreateView and onDestroyView.
     private val bind get() = _bind!!
     private var navController: NavController? = null
+
+    private val viewModel by sharedViewModel<FarmViewModel>()
+    //location vairables
+    private var locationUtil = LocationUtil
+    private lateinit var locationCallback: LocationCallback
+    private var location: Location? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let { bundle ->
+            bundle.getParcelable<Farmer>(K.BUNDLE_ENTRY_FARMER)?.let { viewModel.setFarmer(it) }
+        }
+    }
 
     private val fragments =
         listOf( FarmerDetailsFragment.newInstance(), FarmLocationFragment.newInstance() )
@@ -48,6 +70,8 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
         bind.pager.apply {
             adapter = MainFragmentPagerAdapter(childFragmentManager, lifecycle, fragments)
             isUserInputEnabled = false
+            isSaveEnabled  = false
+            offscreenPageLimit = 2
             registerOnPageChangeCallback(listener)
         }
 
@@ -63,25 +87,49 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
         _bind = null
     }
 
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>,
+                                            grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        //println("requestcode $requestCode and permisions $permissions and grantsresult $grantResults ")
+        when (requestCode) {
+            DeviceRequestUtil.PERMISSION_ALL -> {
+                if (locationUtil.isPermissionGranted(grantResults)) { requestLocation() }
+            }
+        }
+    }
+
     override fun onClick(v: View?) {
         v?.let { view ->
             val pager = bind.pager
             when (view.id) {
                 R.id.btn_back_arrow -> navController?.popBackStack()
                 R.id.btn_next -> {
-                    pager.currentItem = 1
+                    if(viewModel.isFormValidated()){
+                        pager.currentItem = 1
+                    }else null
                 }
                 R.id.btn_previous_page -> {
                     if (pager.currentItem != 0) {
                         pager.currentItem = 0
                     } else null
                 }
-                R.id.btn_next_page -> {
+                R.id.btn_next_page -> viewModel.saveFarms {
+                    if(it){navController?.popBackStack()}
                 }
                 else -> null
             }
         }
     }
+
+    private fun requestLocation() {
+        locationUtil.initLocationRequest(this).requestLocation { location = it }
+        locationCallback = locationUtil.requestLocationUpdates {
+            location = it?.lastLocation
+            viewModel.location = "$${location?.latitude},${location?.longitude}"
+        }
+    }
+
 }
 
 class MainFragmentPagerAdapter(

@@ -11,12 +11,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.efhem.farmapp.R
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
 import kotlinx.android.synthetic.main.farmers_item.view.*
 
-class FarmersAdapter(private val interaction: Interaction? = null) :
+class FarmersAdapter(private val interaction: Interaction) :
     ListAdapter<Farmer, FarmersAdapter.FarmerViewHolder>(FarmerDC()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = FarmerViewHolder(
@@ -45,7 +45,7 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
         }
 
         fun bind(item: Farmer) = with(itemView) {
-            Glide.with(this.context).load(K.BASE_IMAGE_URL + Utils.removeBackSlash(item.avatar))
+            Glide.with(this.context).load(item.avatar)
                 .apply(RequestOptions.placeholderOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.errorOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.centerCropTransform())
@@ -54,10 +54,6 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
             this.tv_name.text = resources.getString(R.string.farmers_name_wph, item.surname, item.firstName)
             this.tv_city.text = item.city
         }
-    }
-
-    interface Interaction {
-        fun onFarmersClick(farmer: Farmer)
     }
 
     private class FarmerDC : DiffUtil.ItemCallback<Farmer>() {
@@ -72,4 +68,8 @@ class FarmersAdapter(private val interaction: Interaction? = null) :
             newItem: Farmer
         ): Boolean = oldItem.id == newItem.id
     }
+}
+
+class Interaction(val clickListener: (farmer: Farmer) -> Unit) {
+    fun onFarmersClick(farmer: Farmer) = clickListener(farmer)
 }
