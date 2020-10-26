@@ -7,9 +7,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentFarmLocationBinding
-import com.efhem.farmapp.domain.repositories.Coordinate
+import com.efhem.farmapp.domain.model.Coordinate
+import com.efhem.farmapp.domain.model.Farm
 import com.efhem.farmapp.ui.FarmCoordinateActivity
 import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.util.K
@@ -20,9 +22,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolygonOptions
-import kotlinx.android.synthetic.main.fragment_farm_location.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -49,12 +49,13 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
     private val captureLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val capturedLocations =
-                    result.data?.getParcelableArrayListExtra<Coordinate>(K.CAPTURE_LOCATION_ENTRY)
-                if (capturedLocations != null) {
+                val newFarm =
+                    result.data?.getParcelableExtra<Farm>(K.CAPTURE_LOCATION_ENTRY)
+                if (newFarm != null) {
                     Toast.makeText(requireContext(), "Farm Coordinate Captured Successful",
                         Toast.LENGTH_LONG).show()
-                    addPolyGone(mMap, capturedLocations)
+                    addPolyGoneFarm(mMap, newFarm)
+                    viewModel.addFarm(newFarm)
                 } else Toast.makeText(requireContext(), "Fail", Toast.LENGTH_LONG).show()
             } else Toast.makeText(requireContext(), "Fail", Toast.LENGTH_LONG).show()
         }
@@ -68,6 +69,13 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
+
+        viewModel.observeFarms.observe(viewLifecycleOwner, Observer {
+            it?.map { farm -> addPolyGoneFarm(mMap, farm) }
+        })
+        viewModel.loading.observe(viewLifecycleOwner, Observer {
+            if(it){bind.progressBar.visibility = View.VISIBLE} else bind.progressBar.visibility = View.GONE
+        })
     }
 
 
@@ -80,8 +88,8 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         mMap = googleMap
     }
 
-    private fun addPolyGone(googleMap: GoogleMap?, locations: List<Coordinate>) {
-        val latlngs = locations.map { LatLng(it.latitude, it.longitude) }
+    private fun addPolyGoneFarm(googleMap: GoogleMap?, farm: Farm) {
+        val latlngs = farm.locations.map { LatLng(it.latitude, it.longitude) }
 
 //        val latlngs = listOf<LatLng>(
 //            LatLng(-27.457, 153.040),
@@ -100,7 +108,7 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
             val latLngBounds = MapUtil.getPolygonLatLngBounds(it)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 200))
         }
-        polygon1?.tag = "alpha"
+        polygon1?.tag = farm.name
     }
 
     override fun onDestroyView() {

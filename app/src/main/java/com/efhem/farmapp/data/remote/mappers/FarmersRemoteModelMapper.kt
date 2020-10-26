@@ -1,7 +1,7 @@
 package com.efhem.farmapp.data.remote.mappers
 
 import com.efhem.farmapp.data.remote.model.FarmerRemote
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.mappers.BaseMapper
 
 class FarmersRemoteModelMapper : BaseMapper<FarmerRemote, Farmer> {

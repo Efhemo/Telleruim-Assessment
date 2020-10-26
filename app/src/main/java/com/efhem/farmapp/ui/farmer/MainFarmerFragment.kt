@@ -6,14 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentMainFarmerBinding
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.util.DeviceRequestUtil
 import com.efhem.farmapp.util.K
@@ -44,7 +43,7 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
     }
 
     private val fragments =
-        listOf(  FarmLocationFragment.newInstance() , FarmerDetailsFragment.newInstance())
+        listOf( FarmerDetailsFragment.newInstance(), FarmLocationFragment.newInstance() )
 
     private val listener = object : ViewPager2.OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
@@ -115,7 +114,8 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
                         pager.currentItem = 0
                     } else null
                 }
-                R.id.btn_next_page -> {
+                R.id.btn_next_page -> viewModel.saveFarms {
+                    if(it){navController?.popBackStack()}
                 }
                 else -> null
             }

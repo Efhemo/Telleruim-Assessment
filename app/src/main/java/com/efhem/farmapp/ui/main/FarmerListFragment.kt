@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.efhem.farmapp.R
-import com.efhem.farmapp.domain.Farmer
 import com.efhem.farmapp.ui.adapters.FarmersAdapter
 import com.efhem.farmapp.ui.adapters.Interaction
 import com.efhem.farmapp.util.K

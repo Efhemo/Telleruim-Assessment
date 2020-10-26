@@ -4,26 +4,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toFile
 import androidx.core.widget.doAfterTextChanged
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentFarmerDetailsBinding
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.Field
 import com.efhem.farmapp.domain.FieldError
 import com.efhem.farmapp.ui.FarmViewModel
-import com.efhem.farmapp.ui.main.MainViewModel
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
-import kotlinx.android.synthetic.main.farmers_item.view.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -52,7 +46,6 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
         initVIew()
         viewModel.observableFarmer.observe(viewLifecycleOwner, { farmer -> farmer?.let { setFarmer(farmer) } })
         viewModel.error.observe(viewLifecycleOwner, { it?.let { showViewError(it) } })
-
     }
 
     private fun initVIew() {
@@ -62,7 +55,6 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
         bind.edlCity.editText?.doAfterTextChanged { editable ->  viewModel.fields["city"] = editable.toString() }
         bind.edlEmail.editText?.doAfterTextChanged { editable ->  viewModel.fields["email"] = editable.toString() }
         bind.edlDob.editText?.doAfterTextChanged { editable ->   viewModel.fields["dob"] = editable.toString() }
-        bind.edlFarmName.editText?.doAfterTextChanged { editable ->  viewModel.fields["farmname"] = editable.toString() }
         bind.rgGender.setOnCheckedChangeListener { _, checkedId ->
             if(checkedId == R.id.male){
                 viewModel.setGender("Male")
@@ -99,7 +91,6 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
             Field.CITY -> bind.edlCity.error = if (it.isError) it.error else null
             Field.DOB -> bind.edlDob.error = if (it.isError) it.error else null
             Field.EMAIL -> bind.edlEmail.error = if (it.isError) it.error else null
-            Field.FARM_NAME -> bind.edlFarmName.error = if (it.isError) it.error else null
             Field.AVATAR -> Toast.makeText(requireContext(), "Select image", Toast.LENGTH_LONG).show()
             else -> Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
         }

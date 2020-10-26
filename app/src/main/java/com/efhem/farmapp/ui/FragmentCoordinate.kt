@@ -6,11 +6,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentCoordinateBinding
-import com.efhem.farmapp.domain.repositories.Coordinate
+import com.efhem.farmapp.domain.model.Coordinate
+import com.efhem.farmapp.domain.model.Farm
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.LocationUtil
 import com.google.android.gms.location.LocationCallback
@@ -61,7 +61,12 @@ class FragmentCoordinate : Fragment(R.layout.fragment_coordinate), View.OnClickL
 
     private fun setCoordinateResult() {
         if ((coordinate1 != null) and (coordinate2 != null) and (coordinate3 != null) and (coordinate4 != null)) {
-            setCaptureResult(
+            val farmName = bind.edlFarmName.editText?.text.toString()
+            if(farmName.isEmpty()){
+                bind.edlFarmName.error = "Farm name is required"
+                return
+            } else bind.edlFarmName.error = null
+            setCaptureResult(farmName,
                 arrayListOf(
                     coordinate1!!,
                     coordinate2!!,
@@ -87,15 +92,27 @@ class FragmentCoordinate : Fragment(R.layout.fragment_coordinate), View.OnClickL
         }
     }
 
-    private fun setCaptureResult(value: ArrayList<Coordinate>?) {
-        val intent = Intent()
-        val bundle = Bundle().apply { putParcelableArrayList(K.CAPTURE_LOCATION_ENTRY, value) }
-        intent.putExtras(bundle)
-        requireActivity().setResult(Activity.RESULT_OK, intent)
-        requireActivity().finish()
+    private fun setCaptureResult(farmName: String, value: ArrayList<Coordinate>?) {
+        if(value != null){
+            val intent = Intent()
+            val bundle = Bundle().apply { putParcelable(K.CAPTURE_LOCATION_ENTRY, Farm("", farmName, value)) }
+            intent.putExtras(bundle)
+            requireActivity().setResult(Activity.RESULT_OK, intent)
+            requireActivity().finish()
+        }else {
+            requireActivity().setResult(Activity.RESULT_CANCELED)
+            requireActivity().finish()
+        }
+
     }
 
     override fun onClick(v: View?) {
+        val farmName = bind.edlFarmName.editText?.text.toString()
+        if(farmName.isEmpty()){
+            bind.edlFarmName.error = "Farm name is required"
+            return
+        }else bind.edlFarmName.error = null
+
         when (v?.id) {
             R.id.fab_1 -> currentLocationTag = 1
             R.id.fab_2 -> currentLocationTag = 2

@@ -1,6 +1,6 @@
 package com.efhem.farmapp.ui.main
 
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package com.efhem.farmapp.domain.repositories
+package com.efhem.farmapp.domain.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

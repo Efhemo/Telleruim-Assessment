@@ -1,7 +1,7 @@
 package com.efhem.farmapp.domain.repositories
 
 import androidx.lifecycle.LiveData
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.ResultWrapper
 
 
@@ -20,5 +20,12 @@ class FarmerRepository(private val local: IFarmerLocalRepo,
     }
 
     override suspend fun atLeastHasOneFarmer(): Boolean = local.getFarmers().isNotEmpty()
+    override suspend fun saveFarmer(farmer: Farmer) {
+        local.saveFarmer(farmer)
+    }
+
+    override suspend fun getFarmer(farmerId: String): Farmer {
+        return local.getFarmer(farmerId)
+    }
 
 }

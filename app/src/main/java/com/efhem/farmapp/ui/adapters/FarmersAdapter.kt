@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.efhem.farmapp.R
-import com.efhem.farmapp.domain.Farmer
+import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
 import kotlinx.android.synthetic.main.farmers_item.view.*
@@ -45,7 +45,7 @@ class FarmersAdapter(private val interaction: Interaction) :
         }
 
         fun bind(item: Farmer) = with(itemView) {
-            Glide.with(this.context).load(K.BASE_IMAGE_URL + Utils.removeBackSlash(item.avatar))
+            Glide.with(this.context).load(item.avatar)
                 .apply(RequestOptions.placeholderOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.errorOf(R.drawable.glide_placeholder))
                 .apply(RequestOptions.centerCropTransform())
