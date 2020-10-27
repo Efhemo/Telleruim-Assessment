@@ -44,7 +44,7 @@ val mRepositoryModules = module {
 
 val mViewModelsModules = module {
 
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
     viewModel { FarmViewModel(get(), get()) }
 
 }

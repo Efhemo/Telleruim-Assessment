@@ -21,6 +21,8 @@
     <string name="surname">Surname</string>
     <string name="location_1">location 1</string>
     <string name="farmers_name_wph">%s %s</string>
+    <string name="win_percentage">%.2f%%</string>
     <string name="farm_name">Farm name</string>
     <string name="submit_update">Submit update</string>
+    <string name="farmers">Farmers</string>
 </resources>
