@@ -3,9 +3,11 @@
 ## Installation
 
 Clone the repository. The App makes use of the Google Maps API, If you don’t already have an account, you will need to create one in order to get an API Key.
-click [here](https://console.cloud.google.com/google/maps-apis/overview) to get started. In your project's root directory, create a file secure.properties and include the following lines:
+click [here](https://console.cloud.google.com/google/maps-apis/overview) to get started. In your project's root directory, create a file `secure.properties` and include the following lines:
 
-`MAPS_API_KEY=`
+```
+MAPS_API_KEY=
+```
 
 ## Libraries
 
