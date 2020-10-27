@@ -80,8 +80,8 @@ object LocationUtil {
         val locationRequest = LocationRequest.create()
         //we will set our timer to 3 seconds
         //but it is expected to consider the time which the farmer will move to the next coordinate
-        locationRequest.interval = 4000
-        locationRequest.fastestInterval = 3000
+        locationRequest.interval = 6000
+        locationRequest.fastestInterval = 5000
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         fusedLocationClient?.requestLocationUpdates(locationRequest, locationCallback, null)
 

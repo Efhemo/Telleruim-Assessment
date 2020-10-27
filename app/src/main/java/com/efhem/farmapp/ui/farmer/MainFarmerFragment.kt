@@ -35,13 +35,6 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
     private var location: Location? = null
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let { bundle ->
-            bundle.getParcelable<Farmer>(K.BUNDLE_ENTRY_FARMER)?.let { viewModel.setFarmer(it) }
-        }
-    }
-
     private val fragments =
         listOf( FarmerDetailsFragment.newInstance(), FarmLocationFragment.newInstance() )
 
@@ -73,6 +66,13 @@ class MainFarmerFragment : Fragment(R.layout.fragment_main_farmer), View.OnClick
             isSaveEnabled  = false
             offscreenPageLimit = 2
             registerOnPageChangeCallback(listener)
+        }
+
+        arguments?.let { bundle ->
+            bundle.getParcelable<Farmer>(K.BUNDLE_ENTRY_FARMER)?.let {
+                bind.btnNextPage.text = getString(R.string.submit_update)
+                viewModel.setFarmer(it)
+            }
         }
 
         bind.btnNext.setOnClickListener(this)

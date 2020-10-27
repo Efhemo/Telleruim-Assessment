@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.efhem.farmapp.R
 import com.efhem.farmapp.databinding.FragmentCoordinateBinding
@@ -62,10 +63,6 @@ class FragmentCoordinate : Fragment(R.layout.fragment_coordinate), View.OnClickL
     private fun setCoordinateResult() {
         if ((coordinate1 != null) and (coordinate2 != null) and (coordinate3 != null) and (coordinate4 != null)) {
             val farmName = bind.edlFarmName.editText?.text.toString()
-            if(farmName.isEmpty()){
-                bind.edlFarmName.error = "Farm name is required"
-                return
-            } else bind.edlFarmName.error = null
             setCaptureResult(farmName,
                 arrayListOf(
                     coordinate1!!,
@@ -135,27 +132,19 @@ class FragmentCoordinate : Fragment(R.layout.fragment_coordinate), View.OnClickL
                 when (currentLocationTag) {
                     1 -> if(coordinate1 != null){
                         bind.fab1.isEnabled = false
-                    }
+                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     2 -> if(coordinate2 != null){
                         bind.fab2.isEnabled = false
-                    }
+                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     3 -> if(coordinate3 != null){
                         bind.fab3.isEnabled = false
-                    }
+                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     4 -> if(coordinate4 != null){
                         bind.fab4.isEnabled = false
-                    }
+                    } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                 }
                 drawPolyGon()
                 setCoordinateResult()
-//                Toast.makeText(
-//                    requireContext(),
-//                    "loc1 ${coordinate1.toString()}" +
-//                            "loc2 ${coordinate2.toString()}" +
-//                            "loc3 ${coordinate3.toString()}" +
-//                            "loc4 ${coordinate4.toString()}" +
-//                            "", Toast.LENGTH_SHORT
-//                ).show()
                 progressDialog.dismiss()
             }
 

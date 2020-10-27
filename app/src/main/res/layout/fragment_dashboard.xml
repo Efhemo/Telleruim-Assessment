@@ -1,14 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.DashboardFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/farmers_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_70"
+        android:text="@string/farmers"
+        android:textColor="@color/faint_grey"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/farmers_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-2dp"
+        android:includeFontPadding="false"
+        android:text="24"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dimen_150"
+        app:layout_constraintLeft_toLeftOf="@id/farmers_title"
+        app:layout_constraintRight_toRightOf="@id/farmers_title"
+        app:layout_constraintTop_toBottomOf="@id/farmers_title" />
+
+    <TextView
+        android:id="@+id/farmers_with_email_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_70"
+        android:text="has email"
+        android:textColor="@color/faint_grey"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="@id/progress_bar_farmer_with_email"
+        app:layout_constraintLeft_toLeftOf="@id/progress_bar_farmer_with_email"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar_farmer_with_email" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_farmer_with_email"
+        android:layout_width="@dimen/dimen_200"
+        android:layout_height="@dimen/dimen_200"
+        android:indeterminateOnly="false"
+        android:progress="60"
+        android:layout_marginTop="@dimen/dimen_70"
+        app:layout_constraintRight_toLeftOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintLeft_toLeftOf="@id/farmers_count"
+        android:progressDrawable="@drawable/circle"
+        app:layout_constraintTop_toBottomOf="@id/farmers_count" />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="@id/progress_bar_farmer_with_email"
+        app:layout_constraintBottom_toBottomOf="@id/progress_bar_farmer_with_email"
+        app:layout_constraintLeft_toLeftOf="@id/progress_bar_farmer_with_email"
+        app:layout_constraintRight_toRightOf="@id/progress_bar_farmer_with_email"
+        android:id="@+id/tv_with_email"
+        android:text="0%"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:id="@+id/farmers_with_email_farm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_70"
+        android:text="has farm"
+        android:textColor="@color/faint_grey"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintRight_toRightOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintLeft_toLeftOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintBottom_toTopOf="@id/progress_bar_farmer_with_farm" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_farmer_with_farm"
+        android:layout_width="@dimen/dimen_200"
+        android:layout_height="@dimen/dimen_200"
+        android:indeterminateOnly="false"
+        android:progress="60"
+        android:layout_marginTop="@dimen/dimen_70"
+        app:layout_constraintRight_toRightOf="@id/farmers_count"
+        app:layout_constraintLeft_toRightOf="@id/progress_bar_farmer_with_email"
+        android:progressDrawable="@drawable/circle"
+        app:layout_constraintTop_toBottomOf="@id/farmers_count" />
+
+    <TextView
+        app:layout_constraintTop_toTopOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintBottom_toBottomOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintLeft_toLeftOf="@id/progress_bar_farmer_with_farm"
+        app:layout_constraintRight_toRightOf="@id/progress_bar_farmer_with_farm"
+        android:id="@+id/tv_with_farm"
+        android:text="0%"
+        android:textStyle="bold"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

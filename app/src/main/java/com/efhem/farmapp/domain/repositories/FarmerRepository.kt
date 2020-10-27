@@ -14,7 +14,6 @@ class FarmerRepository(private val local: IFarmerLocalRepo,
     override suspend fun fetchFarmers(): ResultWrapper<List<Farmer>> {
         val result = remote.getFarmers()
         if (result is ResultWrapper.Success){
-            local.deleteAllFarmers()
             local.saveFarmers(result.data) }
         return result
     }

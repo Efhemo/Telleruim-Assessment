@@ -61,12 +61,18 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
             }else viewModel.setGender("Female")
         }
         bind.camera.setOnClickListener { imageContent.launch("image/*") }
+
+        bind.edlDob.editText?.setOnClickListener {
+            Utils.showDatePicker(childFragmentManager) {
+                bind.edlDob.editText?.setText(it)
+            }
+        }
     }
 
 
 
     private fun setFarmer(farmer: Farmer) {
-        Glide.with(requireContext()).load(K.BASE_IMAGE_URL + Utils.removeBackSlash(farmer.avatar))
+        Glide.with(requireContext()).load(farmer.avatar)
             .apply(RequestOptions.placeholderOf(R.drawable.glide_placeholder))
             .apply(RequestOptions.errorOf(R.drawable.glide_placeholder))
             .apply(RequestOptions.centerCropTransform())

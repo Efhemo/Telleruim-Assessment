@@ -29,7 +29,7 @@ class FarmerLocalModelMapper : BaseMapper<FarmerLocal, Farmer> {
             type.email,
             type.gender,
             type.dob,
-            K.BASE_IMAGE_URL + Utils.removeBackSlash(type.avatar)
+            type.avatar
         )
     }
 

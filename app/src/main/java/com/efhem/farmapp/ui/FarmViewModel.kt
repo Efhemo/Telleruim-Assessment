@@ -8,9 +8,9 @@ import com.efhem.farmapp.data.remote.datasource.FarmRepo
 import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.Field
 import com.efhem.farmapp.domain.FieldError
-import com.efhem.farmapp.domain.model.Coordinate
 import com.efhem.farmapp.domain.model.Farm
 import com.efhem.farmapp.domain.repositories.FarmerRepository
+import com.efhem.farmapp.util.Utils
 import kotlinx.coroutines.launch
 
 class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: FarmerRepository) : ViewModel() {
@@ -101,7 +101,7 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
                 "surname" -> validate(Field.SURNAME, value)
                 "firstname" -> validate(Field.FIRST_NAME, value)
                 "city" -> validate(Field.CITY, value)
-                "email" -> validate(Field.EMAIL, value)
+                "email" -> validateEmail(value)
                 "dob" -> validate(Field.DOB, value)
                 "avatar" -> validate(Field.AVATAR, value)
                 else -> validate(Field.GENDER, value)
@@ -120,6 +120,18 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
             true
         }
     }
+
+    private fun validateEmail(value: String?): Boolean {
+        return if(value.isNullOrEmpty() || ! Utils.isEmail(value)){
+            _error.value = FieldError(Field.EMAIL, error = "invalid Email")
+            return false
+        }else {
+            _error.value = FieldError(Field.EMAIL, isError = false)
+            true
+        }
+    }
+
+
 
     private fun getFilledFarmerForm(): Farmer {
         return if (farmerId == null) {
