@@ -53,6 +53,8 @@
             android:layout_marginTop="@dimen/dimen_24"
             android:layout_marginRight="@dimen/dimen_24"
             android:hint="@string/surname"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:boxStrokeColor="?android:attr/textColorSecondary"
             app:layout_constraintTop_toBottomOf="@id/avatar">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -70,6 +72,8 @@
             android:layout_marginLeft="@dimen/dimen_24"
             android:layout_marginTop="@dimen/dimen_24"
             android:layout_marginRight="@dimen/dimen_24"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:boxStrokeColor="?android:attr/textColorSecondary"
             android:hint="@string/first_name"
             app:layout_constraintTop_toBottomOf="@id/edl_surname">
 
@@ -90,6 +94,8 @@
             android:layout_marginTop="@dimen/dimen_24"
             android:layout_marginRight="@dimen/dimen_24"
             android:hint="@string/city"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:boxStrokeColor="?android:attr/textColorSecondary"
             app:layout_constraintTop_toBottomOf="@id/edl_first_name">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -108,6 +114,8 @@
             android:layout_marginTop="@dimen/dimen_24"
             android:layout_marginRight="@dimen/dimen_24"
             android:hint="@string/email"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:boxStrokeColor="?android:attr/textColorSecondary"
             app:layout_constraintTop_toBottomOf="@id/edl_city">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -163,6 +171,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_24"
             android:hint="@string/date_of_birth"
+            app:hintTextColor="?android:attr/textColorSecondary"
+            app:boxStrokeColor="?android:attr/textColorSecondary"
             app:layout_constraintLeft_toLeftOf="@id/edl_email"
             app:layout_constraintRight_toRightOf="@id/edl_email"
             app:layout_constraintTop_toBottomOf="@id/gender_container">
