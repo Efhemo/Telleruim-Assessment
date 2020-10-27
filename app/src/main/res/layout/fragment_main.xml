@@ -52,6 +52,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="?android:attr/textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_50" />
     </com.google.android.material.appbar.AppBarLayout>
