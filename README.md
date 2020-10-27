@@ -12,7 +12,7 @@ click [here](https://console.cloud.google.com/google/maps-apis/overview) to get 
 - [Viewmodel] (https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) to handle data in a lifecycle-aware fashion.
 - [Navigation Component] to handle all navigations and also passing of data between destinations.
-- [Material Design](https://developer.android.com/guide/navigation)
+- [Material Design](https://developer.android.com/guide/navigation) dark mode supported
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) used to manage the local storage i.e. writing to and reading from the database. Coroutines help in managing background threads and reduces the need for callbacks.
 - [Data Binding](https://developer.android.com/topic/libraries/data-binding/) to declaratively bind UI components in layouts to data sources.
 - [Room](https://developer.android.com/topic/libraries/architecture/room) persistence library which provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
