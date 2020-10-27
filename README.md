@@ -9,7 +9,7 @@ click [here](https://console.cloud.google.com/google/maps-apis/overview) to get 
 
 ## Libraries
 
-- [Viewmodel] (https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
+- [Viewmodel](https://developer.android.com/topic/libraries/architecture/viewmodel) to store and manage UI-related data in a lifecycle conscious way.
 - [LiveData](https://developer.android.com/topic/libraries/architecture/livedata) to handle data in a lifecycle-aware fashion.
 - [Navigation Component](https://developer.android.com/guide/navigation) to handle all navigations and also passing of data between destinations.
 - [Material Design](https://material.io/develop/android/docs/getting-started/) dark mode supported
