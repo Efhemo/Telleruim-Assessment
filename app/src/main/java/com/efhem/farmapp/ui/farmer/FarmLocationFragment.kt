@@ -71,7 +71,11 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         mapFragment?.getMapAsync(this)
 
         viewModel.observeFarms.observe(viewLifecycleOwner, Observer {
-            it?.map { farm -> addPolyGoneFarm(mMap, farm) }
+            it?.map { farm ->
+                println("farm name is ${farm.name} and ${farm.locations.size}")
+                addPolyGoneFarm(mMap, farm)
+            }
+            println("farm name is trying here")
         })
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if(it){bind.progressBar.visibility = View.VISIBLE} else bind.progressBar.visibility = View.GONE
@@ -86,6 +90,9 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
 
     override fun onMapReady(googleMap: GoogleMap?) {
         mMap = googleMap
+        mMap?.setOnPolygonClickListener {
+            Toast.makeText(requireContext(), it.tag.toString(), Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun addPolyGoneFarm(googleMap: GoogleMap?, farm: Farm) {
@@ -103,8 +110,9 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         val polygon1 = googleMap?.addPolygon(
             PolygonOptions().clickable(true).add(*latlngs.toTypedArray()).fillColor(0x50011FF)
         )
+        polygon1?.isClickable = true
         polygon1?.points?.let {
-            Toast.makeText(requireContext(), "ployGone showing", Toast.LENGTH_LONG).show()
+            //Toast.makeText(requireContext(), "ployGone showing", Toast.LENGTH_LONG).show()
             val latLngBounds = MapUtil.getPolygonLatLngBounds(it)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 200))
         }

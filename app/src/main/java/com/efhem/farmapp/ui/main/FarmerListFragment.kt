@@ -40,15 +40,10 @@ class FarmerListFragment : Fragment(R.layout.fragment_farmer_list) {
             }).show()
         })
         mainViewModel.loading.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
+            if (it) { progressBar.visibility = View.VISIBLE
+            } else progressBar.visibility = View.GONE
         })
-        mainViewModel.observableFarmers.observe(viewLifecycleOwner, Observer {
-            adapter.swapData(it)
-        })
+        mainViewModel.observableFarmers.observe(viewLifecycleOwner, Observer { adapter.swapData(it) })
 
         rc.adapter = adapter
     }
@@ -67,7 +62,7 @@ class FarmerListFragment : Fragment(R.layout.fragment_farmer_list) {
         rc.addItemDecoration(verticalDecorator)
         rc.addItemDecoration(horizontalDecorator)
         return FarmersAdapter(Interaction {
-            NavHostFragment.findNavController(this@FarmerListFragment)
+            NavHostFragment.findNavController(this)
                 .navigate(R.id.action_mainFragment_to_mainFarmerFragment, Bundle().apply {
                     putParcelable(K.BUNDLE_ENTRY_FARMER, it)
                 })

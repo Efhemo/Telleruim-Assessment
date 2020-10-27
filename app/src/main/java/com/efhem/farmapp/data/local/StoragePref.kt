@@ -18,7 +18,7 @@ class StoragePref(context: Context) {
         set(value) = preferences.edit { putString(USER_EMAIL, value) }
 
 
-    var accessTokenRefresh: String
+    var accessUserPassword: String
         get() = preferences.getString(ACCESS_PASSWORD, "password") ?: "password"
         set(value) = preferences.edit { putString(ACCESS_PASSWORD, value) }
 

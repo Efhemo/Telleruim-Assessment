@@ -169,9 +169,10 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/ed_dob"
+                android:focusable="true"
+                android:inputType="none"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textEmailAddress" />
+                android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

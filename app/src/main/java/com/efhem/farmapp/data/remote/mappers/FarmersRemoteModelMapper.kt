@@ -3,6 +3,8 @@ package com.efhem.farmapp.data.remote.mappers
 import com.efhem.farmapp.data.remote.model.FarmerRemote
 import com.efhem.farmapp.domain.model.Farmer
 import com.efhem.farmapp.domain.mappers.BaseMapper
+import com.efhem.farmapp.util.K
+import com.efhem.farmapp.util.Utils
 
 class FarmersRemoteModelMapper : BaseMapper<FarmerRemote, Farmer> {
 
@@ -14,7 +16,7 @@ class FarmersRemoteModelMapper : BaseMapper<FarmerRemote, Farmer> {
         type.emailAddress,
         type.gender,
         type.dob,
-        type.passportPhoto
+        K.BASE_IMAGE_URL + Utils.removeBackSlash(type.passportPhoto)
     )
 
     override fun mapToDto(type: Farmer): FarmerRemote = FarmerRemote(
