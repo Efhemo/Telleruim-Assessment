@@ -70,13 +70,6 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
-        viewModel.observeFarms.observe(viewLifecycleOwner, Observer {
-            it?.map { farm ->
-                println("farm name is ${farm.name} and ${farm.locations.size}")
-                addPolyGoneFarm(mMap, farm)
-            }
-            println("farm name is trying here")
-        })
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if(it){bind.progressBar.visibility = View.VISIBLE} else bind.progressBar.visibility = View.GONE
         })
@@ -112,11 +105,21 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         )
         polygon1?.isClickable = true
         polygon1?.points?.let {
-            //Toast.makeText(requireContext(), "ployGone showing", Toast.LENGTH_LONG).show()
+            println("farm name result for polygon: $it")
+            Toast.makeText(requireContext(), "ployGone showing", Toast.LENGTH_LONG).show()
             val latLngBounds = MapUtil.getPolygonLatLngBounds(it)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 200))
         }
         polygon1?.tag = farm.name
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.observeFarms.observe(viewLifecycleOwner, Observer {
+            it?.map { farm ->
+                addPolyGoneFarm(mMap, farm)
+            }
+        })
     }
 
     override fun onDestroyView() {
