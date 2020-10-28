@@ -31,6 +31,8 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
     private val _observeFarms = MutableLiveData<List<Farm>?>()
     val observeFarms: LiveData<List<Farm>?> = _observeFarms
 
+    var fields: HashMap<String, String?> = hashMap()
+
     //new farms
     private var newFarm = ArrayList<Farm>()
     fun addFarm(farm: Farm) {
@@ -78,7 +80,6 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
         }
     }
 
-    var fields: HashMap<String, String?> = hashMap()
 
     private fun hashMap(): HashMap<String, String?> {
         return mapOf<String, String?>(
@@ -104,7 +105,8 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
                 "email" -> validateEmail(value)
                 "dob" -> validate(Field.DOB, value)
                 "avatar" -> validate(Field.AVATAR, value)
-                else -> validate(Field.GENDER, value)
+                "gender" -> validate(Field.GENDER, value)
+                else -> true
             }
             if (isStaticFormValid.not()) break
         }
@@ -147,6 +149,7 @@ class FarmViewModel(private val farmRepo: FarmRepo, private val farmerRepo: Farm
         )
     }
 
+    //manually cleaning up viewmodel
     fun clear() {
         farmerId = null
         _observableFarmer.value = null

@@ -83,9 +83,7 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
         bind.edCity.setText(farmer.city)
         bind.edEmail.setText(farmer.email)
         farmer.gender.let {
-            if (it == "Male") {
-                bind.rgGender.check(R.id.male)
-            } else bind.rgGender.check(R.id.female)
+            if (it == "Male") { bind.rgGender.check(R.id.male) } else bind.rgGender.check(R.id.female)
         }
         bind.edDob.setText(farmer.dob)
     }
@@ -97,8 +95,8 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
             Field.CITY -> bind.edlCity.error = if (it.isError) it.error else null
             Field.DOB -> bind.edlDob.error = if (it.isError) it.error else null
             Field.EMAIL -> bind.edlEmail.error = if (it.isError) it.error else null
-            Field.AVATAR -> Toast.makeText(requireContext(), "Select image", Toast.LENGTH_LONG).show()
-            else -> Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
+            Field.AVATAR -> if (it.isError) Toast.makeText(requireContext(),"Select image", Toast.LENGTH_LONG).show()
+            else -> if (it.isError) Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
         }
     }
 
