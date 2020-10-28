@@ -18,6 +18,7 @@ import com.efhem.farmapp.domain.FieldError
 import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
+import com.efhem.farmapp.util.Utils.disableTextSelection
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -49,6 +50,8 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
     }
 
     private fun initVIew() {
+
+        bind.edlDob.editText?.disableTextSelection()
 
         bind.edlSurname.editText?.doAfterTextChanged { editable ->  viewModel.fields["surname"] = editable.toString() }
         bind.edlFirstName.editText?.doAfterTextChanged { editable ->   viewModel.fields["firstname"] = editable.toString() }
@@ -83,9 +86,7 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
         bind.edCity.setText(farmer.city)
         bind.edEmail.setText(farmer.email)
         farmer.gender.let {
-            if (it == "Male") {
-                bind.rgGender.check(R.id.male)
-            } else bind.rgGender.check(R.id.female)
+            if (it == "Male") { bind.rgGender.check(R.id.male) } else bind.rgGender.check(R.id.female)
         }
         bind.edDob.setText(farmer.dob)
     }
@@ -97,8 +98,8 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
             Field.CITY -> bind.edlCity.error = if (it.isError) it.error else null
             Field.DOB -> bind.edlDob.error = if (it.isError) it.error else null
             Field.EMAIL -> bind.edlEmail.error = if (it.isError) it.error else null
-            Field.AVATAR -> Toast.makeText(requireContext(), "Select image", Toast.LENGTH_LONG).show()
-            else -> Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
+            Field.AVATAR -> if (it.isError) Toast.makeText(requireContext(),"Select image", Toast.LENGTH_LONG).show()
+            else -> if (it.isError) Toast.makeText(requireContext(), "Select a Gender", Toast.LENGTH_LONG).show()
         }
     }
 

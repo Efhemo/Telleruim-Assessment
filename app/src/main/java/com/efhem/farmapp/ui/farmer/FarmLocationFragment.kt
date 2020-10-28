@@ -105,8 +105,6 @@ class FarmLocationFragment : Fragment(R.layout.fragment_farm_location), OnMapRea
         )
         polygon1?.isClickable = true
         polygon1?.points?.let {
-            println("farm name result for polygon: $it")
-            Toast.makeText(requireContext(), "ployGone showing", Toast.LENGTH_LONG).show()
             val latLngBounds = MapUtil.getPolygonLatLngBounds(it)
             googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, 200))
         }
