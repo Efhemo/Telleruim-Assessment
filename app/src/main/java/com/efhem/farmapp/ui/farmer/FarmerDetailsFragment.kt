@@ -18,6 +18,7 @@ import com.efhem.farmapp.domain.FieldError
 import com.efhem.farmapp.ui.FarmViewModel
 import com.efhem.farmapp.util.K
 import com.efhem.farmapp.util.Utils
+import com.efhem.farmapp.util.Utils.disableTextSelection
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -49,6 +50,8 @@ class FarmerDetailsFragment : Fragment(R.layout.fragment_farmer_details) {
     }
 
     private fun initVIew() {
+
+        bind.edlDob.editText?.disableTextSelection()
 
         bind.edlSurname.editText?.doAfterTextChanged { editable ->  viewModel.fields["surname"] = editable.toString() }
         bind.edlFirstName.editText?.doAfterTextChanged { editable ->   viewModel.fields["firstname"] = editable.toString() }

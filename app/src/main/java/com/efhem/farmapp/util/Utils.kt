@@ -3,7 +3,10 @@ package com.efhem.farmapp.util
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.DatePicker
+import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import java.util.*
@@ -44,5 +47,21 @@ object Utils {
 
         val datePickerDialog = DatePickerFragment()
         datePickerDialog.show(fragmentManager, "datePicker")
+    }
+
+    fun EditText.disableTextSelection() {
+        this.customSelectionActionModeCallback = object : android.view.ActionMode.Callback {
+            override fun onActionItemClicked(mode: android.view.ActionMode?, item: MenuItem?): Boolean {
+                return false
+            }
+            override fun onCreateActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+            override fun onPrepareActionMode(mode: android.view.ActionMode?, menu: Menu?): Boolean {
+                return false
+            }
+            override fun onDestroyActionMode(mode: android.view.ActionMode?) {
+            }
+        }
     }
 }

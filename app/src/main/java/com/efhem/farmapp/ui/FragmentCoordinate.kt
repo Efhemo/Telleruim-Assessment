@@ -130,14 +130,17 @@ class FragmentCoordinate : Fragment(R.layout.fragment_coordinate), View.OnClickL
 
             override fun onFinish() {
                 when (currentLocationTag) {
-                    1 -> if(coordinate1 != null){
+                    1 -> if(coordinate1 != null) {
                         bind.fab1.isEnabled = false
+                        Toast.makeText(requireContext(), "Good!, Go to the next side", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     2 -> if(coordinate2 != null){
                         bind.fab2.isEnabled = false
+                        Toast.makeText(requireContext(), "Good!, Go to the next side", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     3 -> if(coordinate3 != null){
                         bind.fab3.isEnabled = false
+                        Toast.makeText(requireContext(), "Good!, Go to the next side", Toast.LENGTH_LONG).show()
                     } else Toast.makeText(requireContext(), "Try again", Toast.LENGTH_LONG).show()
                     4 -> if(coordinate4 != null){
                         bind.fab4.isEnabled = false

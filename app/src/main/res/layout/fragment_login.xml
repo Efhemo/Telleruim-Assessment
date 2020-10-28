@@ -52,6 +52,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_email"
+                    android:textSize="@dimen/text_size_20"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white" />
@@ -74,6 +75,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ed_password"
+                    android:textSize="@dimen/text_size_20"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@color/white" />
